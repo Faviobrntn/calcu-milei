@@ -1,0 +1,10 @@
+fieldset{
+    border: 1px solid rgba(0, 0, 0, 0.175);
+    /* text-align: left; */
+    padding: 10px;
+}
+fieldset > legend{
+    all: unset;
+    font: 1.4em sans-serif;
+    /* text-align: center; */
+}
