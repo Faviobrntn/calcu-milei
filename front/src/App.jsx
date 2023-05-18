@@ -5,10 +5,14 @@ import reactLogo from './assets/currency.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Marquesina } from './Marquesina'
+import { Loader } from './Loader'
+import { useCurrency } from './contexts/CurrencyContext'
 
 function App() {
+  const {loading} = useCurrency();
   return (
     <>
+      {loading && <Loader />}
       <h1>La Calcu de Milei</h1>
       <div>
         <Marquesina />

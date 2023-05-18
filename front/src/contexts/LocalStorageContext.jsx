@@ -12,9 +12,19 @@ export function LocalStorageProvider(props) {
             localStorage.clear();
         }
     }
+    const eliminarItem = (etiqueta) => {
+        if (confirm(`Se va a borrar ${etiqueta} de la tabla. Desea continuar?`)) {
 
+            // const busqueda = lista.findIndex((obj) => obj.etiqueta == etiqueta);
+            
+            const newLista = [...lista.filter(obj => obj.etiqueta != etiqueta)];
+            setLista(newLista);
+            localStorage.setItem('CalcuConversiones', JSON.stringify(newLista));
+        }
+    }
+    
     return (
-        <LocalStorageContext.Provider value={{lista, setLista, borrarTodo}}>
+        <LocalStorageContext.Provider value={{lista, setLista, borrarTodo, eliminarItem}}>
             {props.children}
         </LocalStorageContext.Provider>
     )

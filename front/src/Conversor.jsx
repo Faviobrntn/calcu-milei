@@ -72,22 +72,15 @@ export function Conversor() {
         setTipoDolar('oficial')
     }
 
-    // const handleTipoDolar = (e) => {
-    //     setTipoDolar(e.target.value);
-    //     convertir(e, e.target.value);
-    // }
-
 
     return (
         <>
-            {loading && <h2>Esta cargando capooo!</h2>}
             <div className='mb-3'>
                 <label htmlFor="importe" className='form-label'>Importe (Pesos)</label>
                 <input type="number" name="importe" 
                     className='form-control' 
                     value={importe} 
-                    onChange={e => setImporte(e.target.value)}
-                    // onKeyUp={convertir}
+                    onChange={e => setImporte(parseFloat(e.target.value))}
                 />
             </div>
             
@@ -97,7 +90,6 @@ export function Conversor() {
                     className='form-control' 
                     value={tipo_dolar} 
                     onChange={e => setTipoDolar(e.target.value)}
-                    // onChange={handleTipoDolar}
                 >
                     <option value="oficial">Oficial</option>
                     <option value="blue">Blue</option>
