@@ -27,9 +27,7 @@ Vite (palabra en francés para "rápido", pronunciado como /vit/, como "veet") e
 ## Requisitos
 
 - Debe tener conocimiento en Javascript.
-- Debe tener una versión de Node (npm) >= 18.
-- Debe tener un gestor de base de datos MySQL.
-- Debe tener instalado Composer.
+- Debe tener una versión de Node >= 18 && npm.
 
 
 ## Instalación
