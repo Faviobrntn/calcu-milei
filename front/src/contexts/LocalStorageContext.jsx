@@ -10,7 +10,6 @@ export function LocalStorageProvider(props) {
         if (confirm('Se va a borrar todos los datos de la tabla. Desea continuar?')) {
             setLista([])
             localStorage.clear();
-            setClave(0);
         }
     }
     const eliminarItem = (etiqueta) => {
