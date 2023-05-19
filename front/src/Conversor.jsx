@@ -4,7 +4,7 @@ import { useCurrency } from './contexts/CurrencyContext';
 import './Conversor.css'
 
 export function Conversor() {
-    const {lista, setLista} = useLocalStorage();
+    const {lista, agregarItem, actualizarItem} = useLocalStorage();
     const {oficial, blue, liqui, mep, loading} = useCurrency();
     const [importe, setImporte] = useState(0)
     const [tipo_dolar, setTipoDolar] = useState('oficial')
@@ -25,7 +25,7 @@ export function Conversor() {
 
     useEffect(() => {
         // setConversion((importe / cotizaciones[tipo_dolar]).toFixed(2));
-        if (!loading) {
+        if (!loading && importe != 'NaN') {
             convertir();
         }
     }, [importe, tipo_dolar]);
@@ -48,7 +48,7 @@ export function Conversor() {
             const busqueda = lista.findIndex((obj) => obj.etiqueta == etiqueta);
             // const dolares = (importe / cotizaciones[tipo_dolar]).toFixed(2);        
             const dolares = conversion.compra;   
-            const newLista = [...lista];
+            
             const item = {
                 etiqueta: etiqueta,
                 pesos: importe,
@@ -57,12 +57,10 @@ export function Conversor() {
                 dolares: dolares
             };
             if (busqueda == -1) {
-                newLista.push(item);
+                agregarItem(item);
             }else{
-                newLista[busqueda] = item;
+                actualizarItem(busqueda, item);
             }
-            setLista(newLista);
-            localStorage.setItem('CalcuConversiones', JSON.stringify(newLista));
             reset();
         }
     }

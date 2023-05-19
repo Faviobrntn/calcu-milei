@@ -4,12 +4,13 @@ import { createContext, useContext, useState } from "react";
 const LocalStorageContext = createContext(null);
 
 export function LocalStorageProvider(props) {
-    const [lista, setLista] = useState(JSON.parse(localStorage.getItem('CalcuConversiones')) ?? [])
+    const [lista, setLista] = useState(JSON.parse(localStorage.getItem('CalcuConversiones')) ?? []);
     
     const borrarTodo = () => {
         if (confirm('Se va a borrar todos los datos de la tabla. Desea continuar?')) {
             setLista([])
             localStorage.clear();
+            setClave(0);
         }
     }
     const eliminarItem = (etiqueta) => {
@@ -22,9 +23,25 @@ export function LocalStorageProvider(props) {
             localStorage.setItem('CalcuConversiones', JSON.stringify(newLista));
         }
     }
+    const agregarItem = (item) => {
+        const newLista = [...lista];
+        newLista.push(item);
+        if (newLista.length > 5) {
+            newLista.shift();
+        }
+        setLista(newLista);
+        localStorage.setItem('CalcuConversiones', JSON.stringify(newLista));
+
+    }
+    const actualizarItem = (k, item) => {
+        const newLista = [...lista];
+        newLista[k] = item;
+        setLista(newLista);
+        localStorage.setItem('CalcuConversiones', JSON.stringify(newLista));
+    }
     
     return (
-        <LocalStorageContext.Provider value={{lista, setLista, borrarTodo, eliminarItem}}>
+        <LocalStorageContext.Provider value={{lista, setLista, borrarTodo, agregarItem, actualizarItem, eliminarItem}}>
             {props.children}
         </LocalStorageContext.Provider>
     )
